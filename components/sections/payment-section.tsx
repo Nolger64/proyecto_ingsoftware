@@ -7,19 +7,60 @@ import { Card } from "@/components/ui/card"
 import { ArrowLeft, CreditCard, Banknote, Smartphone, ArrowRight } from "lucide-react"
 
 export default function PaymentSection() {
-  const { setCurrentSection, paymentMethod, setPaymentMethod, cart, getTotalPrice, generateTrackingNumber } =
-    useAppContext()
+  const {
+    setCurrentSection,
+    paymentMethod,
+    setPaymentMethod,
+    cart,
+    getTotalPrice,
+    generateTrackingNumber,
+    personalData, // Importante: necesitamos los datos personales
+    clearCart,    // Importante: para limpiar el carrito tras el pedido
+  } = useAppContext()
 
   const handlePaymentSelect = (method: "efectivo" | "tarjeta" | "transferencia") => {
     setPaymentMethod(method)
   }
 
-  const handleConfirmOrder = () => {
-    if (paymentMethod) {
-      generateTrackingNumber()
-      setCurrentSection("completed")
+  const handleConfirmOrder = async () => {
+    if (!paymentMethod) return;
+
+    // 1. Genera el número de seguimiento para usarlo en la UI y en la DB
+    const newTrackingNumber = generateTrackingNumber();
+
+    // 2. Prepara los datos del pedido que se enviarán a la API
+    const orderPayload = {
+      trackingNumber: newTrackingNumber,
+      customer: { ...personalData },
+      items: [...cart],
+      total: getTotalPrice() + 3000, // Se asume un costo de domicilio de 3000
+      paymentMethod: paymentMethod,
+    };
+
+    try {
+      // 3. Llama a la API para guardar el pedido en la base de datos
+      const response = await fetch('/api/orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(orderPayload),
+      });
+
+      if (!response.ok) {
+        // Si la respuesta de la API no es exitosa, muestra un error
+        throw new Error('La creación del pedido falló');
+      }
+
+      // 4. Si todo sale bien, avanza a la pantalla de completado y limpia el carrito
+      setCurrentSection("completed");
+      clearCart();
+
+    } catch (error) {
+      console.error("Error al crear la orden:", error);
+      // Informa al usuario que algo salió mal
+      alert("Hubo un error al procesar tu pedido. Por favor, inténtalo de nuevo.");
     }
-  }
+  };
+
 
   const paymentOptions = [
     {
