@@ -86,7 +86,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       id: 2,
       name: "Combo Personal",
       price: 18000,
-      image: "/combo-personal.png", // [*] Ruta de imagen de ejemplo. Reemplázala con tu imagen.
+      image: "/images/combo-personal.png", // [*] Ruta de imagen de ejemplo. Reemplázala con tu imagen.
       type: "combo",
       description: "2 presas + 1 porción de papas + 1 gaseosa",
     },
@@ -94,7 +94,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       id: 3,
       name: "Presas Sueltas x2",
       price: 12000,
-      image: "/presas-individuales.jpg", // [*] Ruta de imagen de ejemplo. Reemplázala con tu imagen.
+      image: "/images/presas-individuales.png", // [*] Ruta de imagen de ejemplo. Reemplázala con tu imagen.
       type: "individual",
       description: "2 presas de pollo broaster",
     },
@@ -102,7 +102,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       id: 4,
       name: "Gaseosa Personal",
       price: 3500,
-      image: "/gaseosa.png", // [*] Ruta de imagen de ejemplo. Reemplázala con tu imagen.
+      image: "/images/gaseosa.png", // [*] Ruta de imagen de ejemplo. Reemplázala con tu imagen.
       type: "bebida",
       description: "Gaseosa personal 350ml",
     },
@@ -110,7 +110,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       id: 5,
       name: "Papas Grandes",
       price: 8000,
-      image: "/papas-grandes.jpg", // [*] Ruta de imagen de ejemplo. Reemplázala con tu imagen.
+      image: "/images/papas-grandes.png", // [*] Ruta de imagen de ejemplo. Reemplázala con tu imagen.
       type: "adicional",
       description: "Porción grande de papas fritas",
     },
@@ -118,7 +118,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       id: 6,
       name: "Combo Pareja",
       price: 32000,
-      image: "/combo-pareja.jpg", // [*] Ruta de imagen de ejemplo. Reemplázala con tu imagen.
+      image: "/images/combo-pareja.png", // [*] Ruta de imagen de ejemplo. Reemplázala con tu imagen.
       type: "combo",
       description: "1/2 pollo + 2 porciones de papas + 2 gaseosas",
     },
